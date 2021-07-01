@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <input type="text" placeholder="search" id="input" />
+      <input type="text" placeholder="search" v-model="address" />
       <button id="bt" v-on:click="fetch()">search</button>
     </div>
     <router-view />
@@ -12,13 +12,15 @@
 <script>
 export default {
   data: function () {
-    return {};
+    return {
+      address:'',
+    };
   },
   methods: {
     fetch() {
-      var field = document.querySelector("input[id=input]").value;
+      
       fetch(
-        `https://www.mapquestapi.com/geocoding/v1/address?key=sSHcyXqUGQGnKJav2smr5rcK8MAeAHOO&location=${field}`
+        `https://www.mapquestapi.com/geocoding/v1/address?key=sSHcyXqUGQGnKJav2smr5rcK8MAeAHOO&location=${this.address}`
       )
         .then((res) => res.json())
         .then((data) => {
